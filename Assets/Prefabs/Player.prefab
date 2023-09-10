@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4084829112268646}
   - component: {fileID: 136462993707527496}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: CollisionVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,12 +406,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _debugInfo: 0
+  _groundCheckParent: {fileID: 0}
   _groundedRayPositions:
   - {fileID: 4148928816489578}
   - {fileID: 4098305070360208}
   - {fileID: 4929584968289400}
   - {fileID: 4214202988093086}
-  - {fileID: 4908774125912330}
   _radius: 2
   _groundAccelerationCoeff: 500
   _airAccelCoeff: 1
