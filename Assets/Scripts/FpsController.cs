@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Q3-based first person controller
 /// </summary>
-public class FpsController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     #region Drag Drop
     [Header("Components")]
@@ -22,9 +22,6 @@ public class FpsController : MonoBehaviour
 
     [SerializeField]
     private bool _debugInfo = default;
-
-    [SerializeField]
-    private Transform _groundCheckParent = default;
 
     [SerializeField]
     private List<Transform> _groundedRayPositions = default;
