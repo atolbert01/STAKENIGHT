@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 /// <summary>
 /// Q3-based first person controller
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     #region Drag Drop
     [Header("Components")]
@@ -102,6 +103,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioClip _landClip = default;
 
+    [SerializeField]
+    private GameObject _face;
+
     private List<AudioClip> _shuffledFootstepClips;
     private Vector3 _prevPos;
     private float _distanceCovered;
@@ -127,6 +131,17 @@ public class PlayerController : MonoBehaviour
     private bool _isGonnaJump;
     private Vector3 _wishDirDebug;
     #endregion
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        transform.position = new Vector3(0, 2, 0);
+
+        if (IsLocalPlayer)
+        {
+            _face.SetActive(false);
+        }
+    }
 
     private void Start()
     {

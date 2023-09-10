@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class LaunchMenuManager : MonoBehaviour
 {
@@ -17,9 +19,15 @@ public class LaunchMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject _optionsMenu;
 
+    [SerializeField]
+    private SessionManager _sessionManager;
+
     private Stack<GameObject> _visitedMenus;
 
     private GameObject _currentMenu;
+
+    public delegate void OnGameStarted();
+    public OnGameStarted GameStarted;
 
     public void Start()
     {
@@ -34,6 +42,25 @@ public class LaunchMenuManager : MonoBehaviour
         _hostMenu.SetActive(true);
         _visitedMenus.Push(_hostMenu);
         _currentMenu = _hostMenu;
+    }
+
+    public void OnStartHostClicked()
+    {
+        //SceneManager.LoadScene("TestScene");
+        //NetworkManager.Singleton.StartHost();
+
+        _sessionManager.HostMode = true;
+        GameStarted?.Invoke();
+        SceneManager.LoadScene("TestScene");
+    }
+
+    public void OnStartClientClicked()
+    {
+        //SceneManager.LoadScene("TestScene");
+        //NetworkManager.Singleton.StartHost();
+        _sessionManager.HostMode = false;
+        GameStarted?.Invoke();
+        SceneManager.LoadScene("TestScene");
     }
 
     public void OnJoinClicked()
